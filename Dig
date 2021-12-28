@@ -1,17 +1,8 @@
---Dig--
+--Dig Version 0--
 --Developed by Buzimu#6078--
---Version 0--
-
 function clearScreen()
     term.clear()
     term.setCursorPos(1,1)
-end
-function screenUpdate(carry,digFar,left,digBig)
-    clearScreen()
-        print ('Blocks Mined: '.. carry)
-        print ('Blocks to go: '.. digFar)
-        left = carry/digBig
-        print ('Mining in progress: '.. left ..'%')
 end
 function dig()
     local digFar = 0
@@ -22,18 +13,17 @@ function dig()
     write('How much Dig? ')
     digFar = tonumber(read())
     digBig = digFar
-    while digFar > 0 do
-        --[[clearScreen()
-        print ('Blocks Mined: '.. carry)
-        print ('Blocks to go: '.. digFar)
-        left = carry/digBig
-        print ('Mining in progress: '.. left ..'%')--]]
+    while digFar > 0 do        
         turtle.dig()
         carry = carry +1
         turtle.forward()
         memory = memory + 1
         digFar = digFar - 1
-        screenUpdate(carry,digFar,left,digBig)
+        clearScreen()
+        print ('Blocks Mined: '.. carry)
+        print ('Blocks to go: '.. digFar)
+        left = carry/digBig*100
+        print ('Mining in progress: '.. left ..'%')
     end
     turtle.turnLeft()
     turtle.turnLeft()
