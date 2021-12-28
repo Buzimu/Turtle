@@ -1,0 +1,37 @@
+--Dig--
+--Developed by Buzimu#6078--
+--Version 0--
+
+function clearScreen()
+    term.clear()
+    term.setCursorPos(1,1)
+end
+function dig()
+    local digFar
+    local carry = 0
+    local left
+    local memory = 0
+    write('How much Dig? ')
+    digFar = tonumber(read())
+    local digBig = digFar
+    while digFar > 0 do
+        clearScreen()
+        print ('Blocks Mined: '.. carry)
+        print ('Blocks to go: '.. digFar)
+        left = carry/digBig
+        print ('Mining in progress: '.. left ..'%')
+        turtle.dig()
+        turtle.forward()
+        memory = memory + 1
+        digFar = digFar - 1
+    end
+    turtle.turnLeft()
+    turtle.turnLeft()
+    while memory > 0 do
+        turtle.forward()
+        memory = memory - 1
+    print('Mining Complete!')
+    end
+end
+clearScreen()
+dig()
