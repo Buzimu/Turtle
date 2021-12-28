@@ -7,13 +7,14 @@ function clearScreen()
     term.setCursorPos(1,1)
 end
 function dig()
-    local digFar
+    local digFar = 0
     local carry = 0
-    local left
+    local left = 0
     local memory = 0
+    local digBig = 0
     write('How much Dig? ')
     digFar = tonumber(read())
-    local digBig = digFar
+    digBig = digFar
     while digFar > 0 do
         clearScreen()
         print ('Blocks Mined: '.. carry)
@@ -30,7 +31,8 @@ function dig()
     while memory > 0 do
         turtle.forward()
         memory = memory - 1
-    print('Mining Complete!')
+        print(memory)
+        print('Mining Complete!')
     end
 end
 clearScreen()
