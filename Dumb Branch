@@ -1,0 +1,67 @@
+--[[Dumb Branch Miner Version 0
+Developed by Buzimu#6078]]--
+--23 fuel per spot
+function clearScreen()
+    term.clear()
+    term.setCursorPos(1,1)
+end
+function init()
+    local startFuel = turtle.getFuelLevel
+    clearScreen()
+    write('How many blocks forward before I Start? ')
+    local forwardStart = tonumber(read())
+    branchsPossible = (startFuel - (forwardStart * 2)) / 26
+    moveToStart()  
+end
+function moveToStart()
+    local i = 0
+    while i > 0 do
+        turtle.forward
+        i = i - 1
+end
+function mine()
+    turtle.turnLeft()
+    for i = 5, 0 , -1 do
+        oneBranch()
+    end
+    turnAround()
+    for i = 5, 0, -1 do
+        turtle.forward()
+    end
+    for i = 5, 0 , -1 do
+        oneBranch()
+    end
+    turnAround()
+    for i = 5, 0, -1 do
+        turtle.forward()
+    end
+    turtle.turnRight()
+    for i = 3, 0, -1 do
+        oneBranch()
+    end
+end
+function turnAround()
+    turtle.turnLeft()
+    turlte.turnLeft()
+end
+function oneBranch()
+    turtle.dig()
+    turtle.forward()
+    turtle.digUp()
+end
+function start()
+    local steps = branchsPossible
+    while branchsPossible > 0 do
+        mine()
+        branchesPossible = branchesPossible - 1
+    end
+    turnAround()
+    while steps > 0 do
+        turtle.forward()
+        steps = steps - 1
+    end
+    turnAround()
+    print('All Done')
+end
+init()
+start()
