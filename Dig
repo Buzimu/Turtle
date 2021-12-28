@@ -6,6 +6,13 @@ function clearScreen()
     term.clear()
     term.setCursorPos(1,1)
 end
+function screenUpdate(carry,digFar,left,digBig)
+    clearScreen()
+        print ('Blocks Mined: '.. carry)
+        print ('Blocks to go: '.. digFar)
+        left = carry/digBig
+        print ('Mining in progress: '.. left ..'%')
+end
 function dig()
     local digFar = 0
     local carry = 0
@@ -16,24 +23,27 @@ function dig()
     digFar = tonumber(read())
     digBig = digFar
     while digFar > 0 do
-        clearScreen()
+        --[[clearScreen()
         print ('Blocks Mined: '.. carry)
         print ('Blocks to go: '.. digFar)
         left = carry/digBig
-        print ('Mining in progress: '.. left ..'%')
+        print ('Mining in progress: '.. left ..'%')--]]
         turtle.dig()
+        carry = carry +1
         turtle.forward()
         memory = memory + 1
         digFar = digFar - 1
+        screenUpdate(carry,digFar,left,digBig)
     end
     turtle.turnLeft()
     turtle.turnLeft()
     while memory > 0 do
         turtle.forward()
         memory = memory - 1
-        print(memory)
-        print('Mining Complete!')
     end
+    turtle.turnLeft()
+    turtle.turnLeft()
+    print('Mining Complete!')
 end
 clearScreen()
 dig()
